@@ -18,9 +18,18 @@ class wordpress::install {
         require => Exec['extract_wp'],
         path => ['/bin'],
     }
+  exec { 'permissions_wp':
+    command      => 'chown www-data:www-data /home/blogger/wordpress -R',
+    path        => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
+    require     => Exec['copy_wp'],
+    refreshonly => true,
+  }
   file { '/home/blogger/wp-config.php':
-        ensure => present,
-        require => Exec['copy_wp'],
+        ensure  => present,
+        owner   => 'www-data',
+        group   => 'www-data',
+        mode    => '755',
+        require => Exec['permissions_wp'],
         content => template("wordpress/wp-config.php.erb")
   }
 }
