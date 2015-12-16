@@ -7,12 +7,10 @@ node lamp01 {
       ensure   => present
     }
 	class {'apache': 
-    mpm_module => 'prefork'
+    mpm_module => 'prefork',
+    default_vhost => false,
   }
   class {'::apache::mod::php': }
-  class { 'apache':
-  default_vhost => false,
-  }
 	include ::php
     class { '::mysql::server':
 	}
