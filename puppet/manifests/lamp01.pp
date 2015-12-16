@@ -21,20 +21,9 @@ node lamp01 {
 	  shell    => '/bin/bash',
 	  ensure   => present
 	}
-    class { 'sudo':
-      purge               => false,
-      config_file_replace => false,
+    file { 'hostname':
+        path    => '/etc/sudoers.d/hostname',
+        source  => "puppet:///modules/sudo/hostname",
+        ensure  => file
     }
-    class { 'sudo': }
-        sudo::conf { 'blogger':
-          source => 'puppet:///files/etc/sudoers.d/blogger',
-        }
-        sudo::conf { 'hostname':
-          priority => 10,
-          content  => "blogger ALL=(ALL) NOPASSWD: /etc/init.d/hostname",
-        }
-        sudo::conf { 'blogger':
-          priority => 60,
-          source   => 'puppet:///files/etc/sudoers.d/users/blogger',
-    }    
 }
