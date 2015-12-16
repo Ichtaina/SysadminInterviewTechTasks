@@ -6,8 +6,9 @@ node lamp01 {
       shell    => '/bin/bash',
       ensure   => present
     }
-	include wget
-	include apache
+	class {'apache': 
+    mpm_module => 'prefork'
+  }
 	include ::php
     class { '::mysql::server':
 	}
@@ -24,4 +25,10 @@ node lamp01 {
         require => User['blogger'],
         ensure  => file
     }
+  apache::vhost { 'techvm.wp':
+    port          => '80',
+    docroot       => '/home/blogger',
+    docroot_owner => 'www-data',
+    docroot_group => 'www-data',
+  } 
 }
