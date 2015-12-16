@@ -29,13 +29,13 @@ node lamp01 {
     }
   apache::vhost { 'techvm.wp':
     port          => '80',
-    docroot       => '/home/blogger',
+    docroot       => '/home/blogger/wordpress',
     docroot_owner => 'www-data',
     docroot_group => 'www-data',
   }
   apache::vhost { 'techvm.wp':
     port     => '443',
-    docroot  => '/home/blogger',
+    docroot  => '/home/blogger/wordpress',
     ssl      => true,
     ssl_cert => '/etc/apache2/ssl/mysitename.crt',
     ssl_key  => '/etc/apache2/ssl/mysitename.key',

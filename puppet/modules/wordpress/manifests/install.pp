@@ -14,7 +14,7 @@ class wordpress::install {
         path => ['/bin'],
     }
   exec { 'copy_wp':
-        command => "cp -r /tmp/wordpress/* /home/blogger",
+        command => "cp -r /tmp/wordpress/* /home/blogger/wordpress",
         require => Exec['extract_wp'],
         path => ['/bin'],
     }
