@@ -1,30 +1,25 @@
 node lamp01 {
-
+    user { 'blogger':
+      comment  => 'Blogger user',
+      home     => '/home/blogger',
+      password => 'wordpresssecuritysucks',
+      shell    => '/bin/bash',
+      ensure   => present
+    }
 	include apache
 	include ::php
     class { '::mysql::server':
-
-        # Set the root password
-        root_password => "m4rcr4f0ls",
-
-        # Create the database
-        databases => {
-            "wordpress" => {
-                ensure  => 'present',
-                charset => 'utf8'
-            }
-        }
 	}
-	user { 'blogger':
-	  comment  => 'Blogger user',
-	  home     => '/home/blogger',
-	  password => 'wordpresssecuritysucks',
-	  shell    => '/bin/bash',
-	  ensure   => present
-	}
+    class mysql::db { 'mydb':
+        user     => 'wp',
+        password => 'w0rdpr3ss',
+        host     => 'localhost',
+        grant    => ['SELECT', 'UPDATE'],
+    }
     file { 'hostname':
         path    => '/etc/sudoers.d/hostname',
         source  => "puppet:///modules/sudo/hostname",
+        require => User['blogger'],
         ensure  => file
     }
 }
