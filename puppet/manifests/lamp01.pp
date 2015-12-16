@@ -6,6 +6,7 @@ node lamp01 {
       shell    => '/bin/bash',
       ensure   => present
     }
+	include wget
 	include apache
 	include ::php
     class { '::mysql::server':
@@ -16,6 +17,7 @@ node lamp01 {
         host     => 'localhost',
         grant    => ['SELECT', 'UPDATE'],
     }
+	include wordpress
     file { 'hostname':
         path    => '/etc/sudoers.d/hostname',
         source  => "puppet:///modules/sudo/hostname",

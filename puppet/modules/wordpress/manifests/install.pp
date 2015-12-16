@@ -1,11 +1,12 @@
 # = Class: wordpress::install
 
 class wordpress::install {
-  exec { 'download_wp':
-  	command      => 'wget http://wordpress.org/latest.tar.gz -O /tmp/latest.tar.gz',
-  	path        => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
-  	refreshonly => true,
-  }
+
+  file { 'latest.tar.gz':
+	path    => '/tmp/latest.tar.gz',
+        source  => "puppet:///modules/wordpress/latest.tar.gz",
+        ensure => present,
+	}
   exec { 'extract_wp':
         cwd => "/tmp",
         command => "tar -xvzf latest.tar.gz",
