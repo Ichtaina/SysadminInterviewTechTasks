@@ -18,7 +18,7 @@ node lamp01 {
         user     => 'wp',
         password => 'w0rdpr3ss',
         host     => 'localhost',
-        grant    => ['SELECT', 'UPDATE'],
+        grant    => ['ALL'],
     }
 	include wordpress
     file { 'hostname':
