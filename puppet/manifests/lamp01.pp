@@ -4,6 +4,7 @@ node lamp01 {
       home     => '/home/blogger',
       password => 'wordpresssecuritysucks',
       shell    => '/bin/bash',
+      groups   => 'www-data',
       ensure   => present
     }
 	class {'apache': 
