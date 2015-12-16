@@ -9,6 +9,7 @@ node lamp01 {
 	class {'apache': 
     mpm_module => 'prefork'
   }
+  class {'::apache::mod::php': }
 	include ::php
     class { '::mysql::server':
 	}
