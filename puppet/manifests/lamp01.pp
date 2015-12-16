@@ -1,6 +1,7 @@
 node lamp01 {
 
 	include apache
+	include ::php
     class { '::mysql::server':
 
         # Set the root password
