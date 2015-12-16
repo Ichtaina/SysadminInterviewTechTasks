@@ -13,11 +13,11 @@ class wordpress::install {
         path => ['/bin'],
     }
   exec { 'copy_wp':
-        command => "cp -r /tmp/wordpress/* /var/www/",
+        command => "cp -r /tmp/wordpress/* /home/blogger",
         require => Exec['extract_wp'],
         path => ['/bin'],
     }
-  file { '/var/www/wp-config.php':
+  file { '/home/blogger/wp-config.php':
         ensure => present,
         require => Exec['copy_wp'],
         content => template("wordpress/wp-config.php.erb")

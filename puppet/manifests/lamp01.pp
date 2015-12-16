@@ -10,7 +10,7 @@ node lamp01 {
 	include ::php
     class { '::mysql::server':
 	}
-    class mysql::db { 'mydb':
+    mysql::db { 'wordpress':
         user     => 'wp',
         password => 'w0rdpr3ss',
         host     => 'localhost',
