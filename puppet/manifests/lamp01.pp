@@ -10,6 +10,9 @@ node lamp01 {
     mpm_module => 'prefork'
   }
   class {'::apache::mod::php': }
+  class { 'apache':
+  default_vhost => false,
+  }
 	include ::php
     class { '::mysql::server':
 	}
