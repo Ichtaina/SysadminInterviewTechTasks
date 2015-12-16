@@ -1,6 +1,6 @@
-lamp01 {
-	include apache
+node lamp01 {
 
+	include apache
     class { '::mysql::server':
 
         # Set the root password
